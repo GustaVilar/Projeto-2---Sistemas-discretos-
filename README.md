@@ -17,11 +17,26 @@ O sistema foi dividido em páginas hierárquicas para modularizar o comportament
 
 - Interseccao → Página principal, integra os módulos de filas, controle de semáforos e detectores  
 - Fila_Veiculos → Modela a chegada e armazenamento de veículos (carros e ônibus)  
-- Controle_semaforos → Define os estados dos semáforos (Verde, Amarelo, Vermelho) e sua temporização  
+- Controle_semaforos → Define os estados dos semáforos (Verde, Amarelo, Vermelho) e sua temporização, incluindo sincronização com sinais de pedestres  
 - Detectores de prioridade → Sensores que verificam a presença de ônibus nas filas e ajustam a lógica do ciclo  
 
 Cada módulo é conectado por transições de substituição (substitution transitions), garantindo modularidade e clareza.  
-![WhatsApp Image 2025-09-26 at 03 14 16](https://github.com/user-attachments/assets/c613eae0-eb2e-4a41-8d44-a8b5536da1e2)
+
+### Construção da Página Mãe (Interseccao)  
+A página Interseccao é a visão geral do sistema.  
+- Nela estão os lugares que representam as filas, os semáforos de veículos e pedestres e os detectores de prioridade.  
+- Esses lugares são ligados às subpáginas através de portas de entrada e saída (Port Places) configuradas como I/O.  
+- A Interseccao conecta:  
+  - As filas de veículos à subpágina Fila_Veiculos.  
+  - Os estados dos semáforos à subpágina Controle_semaforos.  
+  - Os detectores à subpágina de prioridade.  
+
+Dessa forma, a página mãe não implementa a lógica em si, mas organiza a comunicação entre os módulos.  
+
+### Construção das Páginas Filhas  
+- **Fila_Veiculos**: contém os lugares para carros e ônibus em cada direção. Tokens coloridos representam os tipos de veículos, e transições temporizadas simulam chegadas (por exemplo, carro a cada 6 unidades de tempo, ônibus a cada 20).  
+- **Controle_semaforos**: utiliza lugares para armazenar o estado atual dos sinais (Verde, Amarelo, Vermelho). As transições temporizadas modelam a mudança de estado e guardas garantem que duas vias conflitantes nunca fiquem verdes ao mesmo tempo. Os sinais de pedestres são sincronizados: ficam verdes quando os veículos da mesma direção estão vermelhos.  
+- **Detector de prioridade**: monitora as filas de ônibus. Se um ônibus é detectado, coloca o lugar Detector em True. Esse valor é lido em Controle_semaforos, onde a transição de Verde para Amarelo passa a considerar um atraso extra de 15 unidades de tempo. Após a passagem do ônibus, o detector volta para False.  
 
 ---
 
@@ -48,12 +63,8 @@ Fluxo implementado no modelo:
 - Estrutura hierárquica com:  
   - Port places bem definidos  
   - Bind Port–Sockets correto  
-  - Modularização clara
+  - Modularização clara  
 
----
-##Vídeo Explicativo do Modelo
-
-[![Assista no YouTube](https://img.youtube.com/vi/KyRkV3Nw9oQ/0.jpg)](https://www.youtube.com/watch?v=KyRkV3Nw9oQ)
 ---
 
 ## Considerações  
@@ -64,3 +75,8 @@ Fluxo implementado no modelo:
   - Modelar chegadas com distribuições probabilísticas (Poisson, exponencial)  
   - Coletar métricas (tempo médio de espera, throughput)  
   - Expandir para múltiplas faixas de tráfego  
+
+---
+
+## Demonstração em Vídeo  
+[![Assista no YouTube](https://img.youtube.com/vi/KyRkV3Nw9oQ/0.jpg)](https://www.youtube.com/watch?v=KyRkV3Nw9oQ)
