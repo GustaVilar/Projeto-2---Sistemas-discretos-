@@ -48,8 +48,12 @@ Fluxo implementado no modelo:
 - Estrutura hierárquica com:  
   - Port places bem definidos  
   - Bind Port–Sockets correto  
-  - Modularização clara  
+  - Modularização clara
 
+---
+##Vídeo Explicativo do Modelo
+
+[![Assista no YouTube](https://img.youtube.com/vi/KyRkV3Nw9oQ/0.jpg)](https://www.youtube.com/watch?v=KyRkV3Nw9oQ)
 ---
 
 ## Considerações  
