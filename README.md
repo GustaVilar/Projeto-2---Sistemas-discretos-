@@ -21,6 +21,7 @@ O sistema foi dividido em páginas hierárquicas para modularizar o comportament
 - Detectores de prioridade → Sensores que verificam a presença de ônibus nas filas e ajustam a lógica do ciclo  
 
 Cada módulo é conectado por transições de substituição (substitution transitions), garantindo modularidade e clareza.  
+![WhatsApp Image 2025-09-26 at 03 14 16](https://github.com/user-attachments/assets/c613eae0-eb2e-4a41-8d44-a8b5536da1e2)
 
 ---
 
