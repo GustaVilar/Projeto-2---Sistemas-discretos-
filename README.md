@@ -10,6 +10,9 @@ O foco do modelo é a simulação do funcionamento de uma interseção urbana qu
 
 Um diferencial do sistema é a prioridade para ônibus, representada por detectores que ajustam dinamicamente o ciclo semafórico, estendendo o tempo de verde quando necessário.  
 
+![WhatsApp Image 2025-09-26 at 03 14 16](https://github.com/user-attachments/assets/2ef8364f-1e57-4937-94dd-c1d96fc96161)
+
+
 ---
 
 ## Modelo do Sistema  
